@@ -45,13 +45,7 @@
             <script type="text/javascript"
             src="https://unpkg.com/mermaid@8.0.0-rc.8/dist/mermaid.min.js">
           </script>
-          <script>
-          $(document).ready(function() {
-              mermaid.initialize({
-                  theme: 'forest'
-              });
-          });
-          </script>
+
 
 
 	</head>
@@ -116,5 +110,37 @@
 				document.body.classList.toggle("nav-open");
 			});
 		</script>
-	</body>
+    </body>
+    <!-- <script>
+        $(document).ready(function() {
+            mermaid.initialize({
+                theme: 'forest'
+            });
+        });
+    </script> -->
+
+    <script>
+        var callback_raw_data = function() {
+            window.location.pathname = '/raw_data'
+        }
+        var callback_range_detection = function() {
+            window.location.pathname = '/range_detection'
+        }
+        var callback_doppler = function() {
+            window.location.pathname = '/doppler'
+        }
+        var callback_beamforming = function() {
+            window.location.pathname = '/beamforming'
+        }
+        var config = {
+            startOnLoad:true,
+            theme: 'neutral',
+            flowchart:{
+                    useMaxWidth:false,
+                    htmlLabels:true
+                }
+        };
+        mermaid.initialize(config);
+        mermaid.init(undefined, '.language-mermaid');
+    </script>
 </html>
