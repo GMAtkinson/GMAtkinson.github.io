@@ -15,18 +15,22 @@
 		<link rel="icon" type="image/png" href="{{ site.baseurl }}/images/favicon.png">
 
 		{% if jekyll.environment == 'production' and site.google_analytics_key != '' %}
-			<script>
-				window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-				ga('create', '{{ site.google_analytics_key }}', 'auto');
-				ga('send', 'pageview');
-			</script>
-			<script async src='https://www.google-analytics.com/analytics.js'></script>
+		<script>
+			console.log("When do I get here?");
+			window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+			ga('create', '{{ site.google_analytics_key }}', 'auto');
+			ga('send', 'pageview');
+		</script>
+			
+		<script async src='https://www.google-analytics.com/analytics.js'></script>
+
         {% endif %}
         
         <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>
+			src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML">
+		</script>
 
-        <script type="text/x-mathjax-config">
+		<script type="text/x-mathjax-config">
             MathJax.Hub.Config({
             tex2jax: {
             inlineMath: [['$','$'], ['\\(','\\)']],
@@ -40,11 +44,11 @@
             }
             }
             });
-            </script>
+        </script>
 
-            <script type="text/javascript"
+        <script type="text/javascript"
             src="https://unpkg.com/mermaid@8.0.0-rc.8/dist/mermaid.min.js">
-          </script>
+        </script>
 
 
 
@@ -106,6 +110,11 @@
 		</section>
 
 		<script>
+			//setTimeout(function(){ 
+				//console.log("When do I get here 2? ", document.getElementsByClassName("test")[0].textContent, " 1234"); 
+			//}, 3000);
+			
+
 			document.getElementById("open-nav").addEventListener("click", function () {
 				document.body.classList.toggle("nav-open");
 			});
@@ -120,6 +129,7 @@
     </script> -->
 
     <script>
+		console.log("When do I get here 3?");
         var callback_raw_data = function() {
             window.location.pathname = '/raw_data'
         }

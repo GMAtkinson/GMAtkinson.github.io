@@ -5,3 +5,5 @@ category: Radar Basics
 order: 1
 ---
 ---
+
+A typical radar transmits 
