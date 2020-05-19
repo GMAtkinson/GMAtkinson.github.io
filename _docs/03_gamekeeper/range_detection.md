@@ -119,7 +119,7 @@ where $B$ is the bandwidth of the transmitted pulse and $c$ is the speed of ligh
         var row_values = Object.entries(item);
         for(const [key, val] of row_values) {
             if(key.startsWith("i_")) {
-                test += "<td>" + "<input id=" + key + " type='text' value='" + val + "'></td>";
+                test += "<td>" + "<input id=" + key + " type='number' value='" + val + "'></td>";
             } else {
                 test += "<td id=" + key + " >" + val + "</td>";
             }
