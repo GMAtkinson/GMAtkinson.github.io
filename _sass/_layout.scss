@@ -3,6 +3,18 @@ input::-ms-reveal {
 	display: none !important;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 body {
 	height: auto;
 	overflow-x: hidden;
@@ -476,9 +488,27 @@ table {
 	table-layout: fixed;
 }
 
-// td {
-// 	background: rgb(240, 240, 240);
-// }
+th.unit {
+	width: 10%;
+}
+
+th.val {
+	width: 20%;
+	text-align: right;
+}
+
+th.value {
+	text-align: right;
+}
+
+td.unit {
+	width: 10%;
+}
+
+td.val {
+	text-align: right;
+	width: 20%;
+}
 
 th {
 	background: rgb(238, 238, 238);
@@ -486,6 +516,32 @@ th {
 
 input {
 	width: 100%;
+	text-align: right;
 }
+
+td.title {
+	//text-align: center;
+	//background: rgb(200, 200, 200);
+	background: rgb(250, 250, 250);
+}
+
+
+
+// div.input {
+// 	position: relative;
+// }
+
+// .input input {
+// 	// width: 100%;
+// 	width: calc(100% - 40px);
+// 	padding-right: 40px;
+// 	text-align: right;
+// }
+
+// .input span {
+// 	position: absolute;
+// 	right: 10px;
+// 	top: 0%;
+// }
 
 // tr:nth-child(even) {background-color: #f8f8f8;}

@@ -2,7 +2,7 @@
 layout: page
 title: Doppler
 category: Gamekeeper Radar
-order: 5
+order: 6
 ---
 ---
 
@@ -25,7 +25,7 @@ The corresponding radial velocity resolution is given by
 where $\lambda = \frac{c}{f_c}$ is the carrier wavelength, and $f_c$ denotes the carrier frequency.
 
 <form id="doppler-form">
-  <table id='json-table'>
+  <table id='doppler-table'>
     <thead>
         <tr></tr>
     </thead>
@@ -34,9 +34,10 @@ where $\lambda = \frac{c}{f_c}$ is the carrier wavelength, and $f_c$ denotes the
 </form>
 
 <script>
-    doppler_table = {
+    doppler_params = {
         headers: [
             "Parameter",
+            "Symbol",
             "Value",
             "Unit",
         ],
@@ -79,82 +80,133 @@ where $\lambda = \frac{c}{f_c}$ is the carrier wavelength, and $f_c$ denotes the
         ]
     }
 
+    doppler_params = {
+        headers: [
+            "Parameter",
+            "Symbol",
+            "Value",
+            "unit",
+        ],
 
-    doppler_table.headers.forEach(function(item) {
-        document.getElementById("json-table").children[0].children[0].innerHTML += "<th>" + item + "</th>";
-    })
-    
-    var test = "";
-    doppler_table.fields.forEach(function(item) {
-        test += "<tr>";
-        var row_values = Object.entries(item);
-        for(const [key, val] of row_values) {
-            if(key.startsWith("i_")) {
-                test += "<td>" + "<input id=" + key + " type='text' value='" + val + "'></td>";
-            } else {
-                test += "<td id=" + key + " >" + val + "</td>";
-            }
-            
-        }
-        test += "</tr>";
-    })
-    document.getElementById("json-table").children[1].innerHTML += test;
+        fields: [
+            {
+                name: "Pulse Repetition Frequency",
+                symbol: "$PRF$",
+                val: 7353,
+                unit: "$\\mathrm{Hz}$",
+                db_unit: "",
+                db: false,
+                input: true,
+            },
 
-    var form = document.getElementById("range-form"); 
+            {
+                name: "FFT Length",
+                symbol: "$N_{FFT}$",
+                val: 2048,
+                unit: "",
+                db_unit: "",
+                db: false,
+                input: true,
+            },
+
+            {
+                name: "Doppler Resolution",
+                symbol: "$\\Delta f$",
+                val: 3.66,
+                unit: "$\\mathrm{Hz}$",
+                db_unit: "",
+                db: false,
+                input: false,
+            },
+
+            {
+                name: "Carrier Frequency",
+                symbol: "$f_c$",
+                val: 1256.875,
+                unit: "$\\mathrm{MHz}$",
+                db_unit: "",
+                db: false,
+                input: true,
+            },
+
+            {
+                name: "Wavelength",
+                symbol: "$\\lambda$",
+                val: 0.2384,
+                unit: "$\\mathrm{m}$",
+                db_unit: "",
+                db: false,
+                input: false,
+            },
+
+            {
+                name: "Radial Velocity Resolution",
+                symbol: "$\\Delta v_r$",
+                val: 0.437,
+                unit: "$\\mathrm{m/s}$",
+                db_unit: "",
+                db: false,
+                input: false,
+            },
+        ]
+    }
+
+    generateTable3("doppler-table", doppler_params);
 
     var prf = 7500;
     var nfft = 2048;
     var fc = 2;
     var wavelength = 0.150;
 
-    document.getElementById("i_prf").addEventListener("input", function (e) {
+    document.getElementById("Pulse Repetition Frequency").addEventListener("input", function (e) {
         e.preventDefault(); 
 
-        prf = document.getElementById("i_prf").value;
+        prf = document.getElementById("Pulse Repetition Frequency").value;
 
         calculate();
     });
 
-    document.getElementById("i_nfft").addEventListener("input", function (e) {
+    document.getElementById("FFT Length").addEventListener("input", function (e) {
         e.preventDefault(); 
 
-        nfft = document.getElementById("i_nfft").value;
+        nfft = document.getElementById("FFT Length").value;
 
         calculate();
     });
 
-    document.getElementById("i_fc").addEventListener("input", function (e) {
+    document.getElementById("Carrier Frequency").addEventListener("input", function (e) {
         e.preventDefault(); 
 
-        fc = document.getElementById("i_fc").value;
+        fc = document.getElementById("Carrier Frequency").value;
 
-        wavelength = 299792458.0 / (fc * 10e8);
+        wavelength = 299792458.0 / (fc * 1e6);
 
-        document.getElementById("i_lambda").value = wavelength.toFixed(3);
+        //document.getElementById("Wavelength").value = wavelength.toFixed(3);
 
         calculate();
     });
 
-    document.getElementById("i_lambda").addEventListener("input", function (e) {
-        e.preventDefault(); 
+    // document.getElementById("Wavelength").addEventListener("input", function (e) {
+    //     e.preventDefault(); 
 
-        wavelength = document.getElementById("i_lambda").value;
+    //     wavelength = document.getElementById("Wavelength").value;
 
-        fc = 299792458.0 / (wavelength * 10e8);
+    //     fc = 299792458.0 / (wavelength * 1e6);
 
-        document.getElementById("i_fc").value = fc.toFixed(3);
+    //     document.getElementById("Carrier Frequency").value = fc.toFixed(3);
 
-        calculate();
-    });
+    //     calculate();
+    // });
 
     function calculate() {
         var doppler_freq = prf / nfft;
         //var wavelength = 299792458.0 / (fc * 10e8);
         console.log(wavelength);
         var velocity = wavelength * doppler_freq / 2.0;
-
-        document.getElementById("o_doppler_freq").innerHTML = doppler_freq.toFixed(3);
-        document.getElementById("o_velocity").innerHTML = velocity.toFixed(3);
+        
+        document.getElementById("Wavelength").innerHTML = wavelength.toFixed(3);
+        document.getElementById("Doppler Resolution").innerHTML = doppler_freq.toFixed(3);
+        document.getElementById("Radial Velocity Resolution").innerHTML = velocity.toFixed(3);
     }
 
 
@@ -162,4 +214,4 @@ where $\lambda = \frac{c}{f_c}$ is the carrier wavelength, and $f_c$ denotes the
 
 </script>
 
-A single frame with 2048 pulses results in a Doppler resolution of $3.66\;\mathrm{Hz}$.
+A single frame with 2048 pulses results in a Doppler resolution of $3.66\;\mathrm{Hz}$ or $0.437 \mathrm{m/s}$.
